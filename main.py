@@ -24,6 +24,20 @@ def init_params():
     W2 = np.random.rand(10, 784)
     b2 = np.random.rand(10, 1)
 
+def ReLU(Z):
+    return np.maximum(0, Z)
+
+def softmax(Z):
+    np.exp(Z) / np.sum(np.exp(Z))
+    
+def forward_prop(W1, b1, W2, b2, X):
+    Z1 = W1.dot(X) + b1
+    A1 = ReLU(Z1)
+
+    Z2 = W2.dot(X) + b2
+    A2 = softmax(Z2)
+
+
 
 
 
