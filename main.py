@@ -9,10 +9,8 @@ m, n = data.shape
 np.random.shuffle(data)
 test_data = data[0:1000].T
 
-
 Y_test = test_data[0]
 X_test = test_data[1:n]
-
 
 train_data = data[1000:m].T
 Y_train = train_data[0]
@@ -67,6 +65,26 @@ def update_params(W1, b1, W2, b2, dW1, db1, dW2, db2, alpha):
 
     return W1, b1, W2, b2
 
+def get_predictions(A2):
+    return np.argmax(A2, 0)
+
+def get_accuracy(predictions, Y):
+    print(predictions, Y)
+    return np.sum(predictions == Y) / Y.size
+
+def gradient_descent(X, Y, iterations, alpha):
+    W1, b1, W2, b2 = init_params()
+
+    for i in range(iterations):
+        Z1, A1, Z2, A2 = forward_prop(W1, b1, W2, b2, X)
+        dW1, db1, dW2, db2 = backward_prop(Z1, A1, Z2, A2, W2, X, Y)
+        dW1, db1, dW2, db2 = update_params(W1, b1, W2, b2, dW1, db1, dW2, db2, alpha)
+        if i % 50 == 0:
+            print('Iteration: ', i)
+            print('Accuracy: ', get_accuracy(get_predictions(A2), Y))
+    return W1, b1, W2, b2
+
+W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 100, 0.1)
 
 
 
