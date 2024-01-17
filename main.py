@@ -18,7 +18,12 @@ train_data = data[1000:m].T
 Y_train = train_data[0]
 X_train = train_data[1:n]
 
-print(Y_train)
+def init_params():
+    W1 = np.random.rand(10, 784)
+    b1 = np.random.rand(10, 1)
+    W2 = np.random.rand(10, 784)
+    b2 = np.random.rand(10, 1)
+
 
 
 
